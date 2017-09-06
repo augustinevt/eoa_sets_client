@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
+import { Input } from 'eoa-component-library';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return(
-      <div> hello worlde </div>
+      <div> hello worlde <Input /> </div>
     )
   }
 }

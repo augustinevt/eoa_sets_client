@@ -6,12 +6,15 @@
   "scripts": {
     "test": "test",
     "start": "webpack-dev-server --env development --config ./config/webpack.config.js",
-    "build": "webpack --env production --config ./config/webpack.config.js"
+    "build": "webpack --env production --watch --config ./config/webpack.config.js"
   },
   "author": "Augustine von Trapp",
   "license": "ISC",
   "dependencies": {
+    "code-point-at": "^1.1.0",
+    "eoa-component-library": "^1.0.2",
     "express": "^4.15.4",
+    "is-fullwidth-code-point": "^2.0.0",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.7",
     "webpack": "^3.5.5",
