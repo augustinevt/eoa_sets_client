@@ -1,8 +1,8 @@
 const thing = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_REQUEST_SUCCESS':
+    case 'GET_SETS_SUCCESS':
 
-      return {...state, treeName: action.payload};
+      return action.payload;
 
     default:
       return state;

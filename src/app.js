@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import { Input } from 'eoa-component-library';
+import { GenFeatureContainer } from './genFeature';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,10 @@ class App extends React.Component {
 
   render() {
     return(
-      <div> hello worlde <Input /> </div>
+      <div>
+        <Input />
+        <GenFeatureContainer />
+      </div>
     )
   }
 }

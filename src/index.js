@@ -10,7 +10,10 @@ import { all } from 'redux-saga/effects'
 
 import App from './app';
 
-import { genFeatureSagas, genFeatureReducer } from './mainViewFeature';
+import { genFeatureSagas, genFeatureReducer } from './genFeature/operations';
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
   yield all([
@@ -18,7 +21,14 @@ function* rootSaga() {
   ])
 }
 
-const store = createStore(mainViewReducer, applyMiddleware(createSagaMiddleware(), logger))
+const store = createStore(
+  genFeatureReducer,
+  applyMiddleware(
+    sagaMiddleware,
+    createLogger()
+  )
+)
+
 sagaMiddleware.run(rootSaga)
 
 const rootNode = document.createElement('div');
@@ -27,9 +37,11 @@ document.body.appendChild(rootNode);
 const render = (app) => {
 
   ReactDOM.render(
-    <AppContainer>
-      <App />
-    </AppContainer>,
+    <Provider store={store} >
+      <AppContainer>
+        <App />
+      </AppContainer>
+    </Provider>,
     rootNode
   );
 }
@@ -38,6 +50,7 @@ render(App);
 
 if (module.hot) {
   module.hot.accept('./app', () => {
+    // const newRender = require('./app.js').default;
     render(App);
   });
 }
