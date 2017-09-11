@@ -14,6 +14,7 @@
     "code-point-at": "^1.1.0",
     "eoa-component-library": "^1.0.2",
     "express": "^4.15.4",
+    "immutable": "^3.8.1",
     "is-fullwidth-code-point": "^2.0.0",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.7",
