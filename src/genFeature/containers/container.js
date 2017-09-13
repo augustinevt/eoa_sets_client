@@ -27,6 +27,8 @@ const mapStateToProps = (state) => ({
 class SetsContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.makeSet = this.makeSet.bind(this);
   }
 
   componentDidMount() {
@@ -34,18 +36,14 @@ class SetsContainer extends React.Component {
   }
 
   showSet() {
-    const manifest = this.props.state.manifest;
+    const manifest = this.props.state;
     const display = [];
     const selectedSet = manifest[0];
-
-console.log('MOCK SELECTED!!!', selectedSet);
 
   if (selectedSet) {
 
     getChildren(manifest, selectedSet.subsets, display);
   }
-
-console.log(display)
 
     return (
       <div>
@@ -54,8 +52,19 @@ console.log(display)
     )
   }
 
+  makeSet() {
+    const test = {
+      "name": "avoid stupid",
+      "root": true,
+      "prompt": "foo foo",
+      "subsets": []
+    }
+
+    this.props.dispatch({type: 'CREATE_SET_REQUESTED', payload: test});
+  }
+
   listSets() {
-    const manifest = this.props.state.manifest;
+    const manifest = this.props.state;
     console.log( manifest)
     return Object.keys(manifest).map(set => {
       if (manifest[set].root) {
@@ -76,6 +85,9 @@ console.log(display)
         <div>
           <h2> Single </h2>
           {set}
+        </div>
+        <div onClick={this.makeSet}>
+          CREATE SET
         </div>
       </div>
 

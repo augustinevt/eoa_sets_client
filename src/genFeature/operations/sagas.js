@@ -14,15 +14,33 @@ function* getSets(action) {
   }
 }
 
-/// ===== ///
-
 function* loadingSaga() {
   yield takeLatest("GET_SETS_REQUESTED", getSets)
 }
 
+/// ===== ///
+
+function* createSet(action) {
+  try {
+    const newSetId = yield call(api.createSet, action.payload);
+console.log('newSet', newSetId)
+    yield put({ type: 'CREATE_SET_SUCCESS', payload: { set: action.payload, id: newSetId }});
+  } catch (e) {
+    yield put({ type: 'CREATE_SET_FAILURE', payload: action.payload });
+  }
+}
+
+function* createSetSaga() {
+  yield takeLatest("CREATE_SET_REQUESTED", createSet);
+}
+
+/// ===== ///
+
+
 function* rootSaga() {
   yield all([
     loadingSaga(),
+    createSetSaga()
   ])
 }
 
