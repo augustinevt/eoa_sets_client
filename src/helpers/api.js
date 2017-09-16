@@ -20,4 +20,13 @@ export default {
       return res.json();
     }));
   },
+  deleteSet: (setId) => {
+console.log('1 in api', setId)
+    return fetch(`${apiDomain}/sets/${setId}`, {
+      method: 'DELETE',
+    }).then((res => {
+      console.log("in api", res);
+      return res.json();
+    }));
+  },
 }

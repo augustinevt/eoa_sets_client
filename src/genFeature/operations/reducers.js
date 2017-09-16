@@ -15,6 +15,12 @@ const thing = (state = initialState, action) => {
 
       return state.push(newSet)
 
+    case 'DELETE_SET_SUCCESS':
+      console.log('delete success', action.payload)
+
+      return state.filterNot(x => x._id === action.payload.setId)
+      // console.log(x._id, action.payload.setId, x._id === action.payload.setId)
+
     default:
       return state;
   }

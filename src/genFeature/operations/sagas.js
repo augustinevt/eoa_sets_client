@@ -18,7 +18,7 @@ function* loadingSaga() {
   yield takeLatest("GET_SETS_REQUESTED", getSets)
 }
 
-/// ===== ///
+/// == CREATE SET == ///
 
 function* createSet(action) {
   try {
@@ -34,13 +34,30 @@ function* createSetSaga() {
   yield takeLatest("CREATE_SET_REQUESTED", createSet);
 }
 
-/// ===== ///
+/// == DELETE SET == ///
 
+function* deleteSet(action) {
+  try {
+    const setId = action.payload.setId;
+    const deletedSetId = yield call( api.deleteSet, setId )
+console.log('api call in saga', deletedSetId)
+    yield put({ type: 'DELETE_SET_SUCCESS', payload: {setId: deletedSetId.setId}})
+  } catch (e) {
+    yield put({type: 'DELETE_SET_FAILURE', payload: null})
+  }
+}
+
+function* deleteSetSaga() {
+  yield takeLatest("DELETE_SET_REQUESTED", deleteSet);
+}
+
+/// ==== ///
 
 function* rootSaga() {
   yield all([
     loadingSaga(),
-    createSetSaga()
+    createSetSaga(),
+    deleteSetSaga(),
   ])
 }
 

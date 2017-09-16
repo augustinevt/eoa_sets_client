@@ -29,6 +29,7 @@ class SetsContainer extends React.Component {
     super(props);
 
     this.makeSet = this.makeSet.bind(this);
+    this.deleteSet = this.deleteSet.bind(this);
   }
 
   componentDidMount() {
@@ -63,17 +64,21 @@ class SetsContainer extends React.Component {
     this.props.dispatch({type: 'CREATE_SET_REQUESTED', payload: test});
   }
 
+  deleteSet(setId) {
+    this.props.dispatch({type: 'DELETE_SET_REQUESTED', payload: { setId }})
+  }
+
   listSets() {
     const manifest = this.props.state;
-    console.log( manifest)
     return Object.keys(manifest).map(set => {
       if (manifest[set].root) {
-        return <div> {manifest[set].name} </div>
+        return <div>{manifest[set].name}<div onClick={ () => this. deleteSet(manifest[set]._id) }>X</div></div>
       }
     })
   }
 
   render() {
+    console.log(this.props.manifest)
     const list = this.listSets();
     const set = this.showSet();
     return (
