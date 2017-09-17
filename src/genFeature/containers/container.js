@@ -30,6 +30,7 @@ class SetsContainer extends React.Component {
 
     this.makeSet = this.makeSet.bind(this);
     this.deleteSet = this.deleteSet.bind(this);
+    this.updateSet = this.updateSet.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +69,12 @@ class SetsContainer extends React.Component {
     this.props.dispatch({type: 'DELETE_SET_REQUESTED', payload: { setId }})
   }
 
+  updateSet(setId, setObject) {
+    const mockSet = this.props.state[0];
+    mockSet.name = 'updated';
+    this.props.dispatch({ type: 'UPDATE_SET_REQUESTED', payload: {setId: mockSet._id, setObj: mockSet}});
+  }
+
   listSets() {
     const manifest = this.props.state;
     return Object.keys(manifest).map(set => {
@@ -93,6 +100,9 @@ class SetsContainer extends React.Component {
         </div>
         <div onClick={this.makeSet}>
           CREATE SET
+        </div>
+        <div onClick={this.updateSet}>
+          UPDATE SET
         </div>
       </div>
 

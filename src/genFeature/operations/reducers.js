@@ -11,7 +11,8 @@ const thing = (state = initialState, action) => {
     case 'CREATE_SET_SUCCESS':
       const newSet = action.payload.set;
       const newSetId = action.payload.newSetId;
-      newSet._id = newSetId;
+      // newSet._id = newSetId;
+      newSet._id = 234 * Math.random();
 
       return state.push(newSet)
 
@@ -20,6 +21,15 @@ const thing = (state = initialState, action) => {
 
       return state.filterNot(x => x._id === action.payload.setId)
       // console.log(x._id, action.payload.setId, x._id === action.payload.setId)
+
+    case 'UPDATE_SET_SUCCESS':
+      state.forEach((set, i) => {
+        if (set._id === action.payload.id) {
+          state.set(i, action.payload.setObj)
+        }
+      })
+
+      return state.map(set => set) /// what's the deal with this????
 
     default:
       return state;
