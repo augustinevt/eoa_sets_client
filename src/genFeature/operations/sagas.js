@@ -59,8 +59,8 @@ function* deleteSetSaga() {
 function* updateSet(action) {
   try {
     const { setId, setObj } = action.payload;
-    // const updatedSetId = yield call(api.updateSet, setId, setObj);
-    const updatedSetId = yield new Promise( (resolve, reject) => resolve({id: setId}));
+    const updatedSetId = yield call(api.updateSet, setId, setObj);
+    // const updatedSetId = yield new Promise( (resolve, reject) => resolve({id: setId}));
     yield put({type: 'UPDATE_SET_SUCCESS', payload: {id: updatedSetId.id, setObj: setObj}});
   } catch (e) {
     yield put({type: 'UPDATE_SET_FAILURE', payload: {error: e}})
